@@ -1,9 +1,9 @@
 let Controller = require('./WebController');
-let __this ;
+let _this ;
 module.exports = class Welcome extends Controller  {
 	constructor(){
 		super();
-		__this =this;
+		_this =this;
 
 	}
 	async showWelcome(req,res){

@@ -80,6 +80,7 @@ module.exports = class User extends Model {
 			return users;
 		 }
 		 catch(error){
+			console.log(error);
 			return Promise.reject( error);
 		 }
 	}
@@ -96,7 +97,7 @@ module.exports = class User extends Model {
 		}
 		try{
 			let saltRound = await bcrypt.genSalt(10);
-			let hash = await bcrypt.hash(value,saltRound);
+			let hash = await bcrypt.hash(value.toString(),saltRound);
 			let genHash= isObject?(object[filed]=hash):hash;
 			return isObject?object:genHash;
 		}

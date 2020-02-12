@@ -1,10 +1,9 @@
 let Controller = require('./ApiController');
-let __this ;
+let _this ;
 module.exports = class AuthController extends Controller{
 	constructor(){
 		super();
-		__this =this;
-
+		_this =this;
 	}
 	async userRegistration(req,res) {
 		let {body:receiveData} =req;
@@ -21,7 +20,10 @@ module.exports = class AuthController extends Controller{
 
 	async userLogin(req,res){
 		let{body:receiveData} = req;
+		
+		// let UserModel = _this.loadmodel('User'); or use 
 		let UserModel = process.app.service.use('UserModel');
+
 		try{
 		let dataFromDb = await UserModel.userEmailPasswordCheck(receiveData);
 		
@@ -57,7 +59,9 @@ module.exports = class AuthController extends Controller{
 		catch(error){
 			console.log(error);
 			if(error.error){
-				return res.status(422).json(error);
+				return res.status(422).json({error:{
+					message:error.error,
+				}});
 			}
 			return res.status(500).json(error);
 		}

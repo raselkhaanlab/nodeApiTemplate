@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {loadcontroller} = require('./../../util/loader'); 
+const loadcontroller = require('./../../lib/loader/loadController'); 
 const validate = require('./../../app/validation/validate');
 const validation = require("./../../app//validation/validation_rules/validation");
 /*
@@ -8,6 +8,6 @@ const validation = require("./../../app//validation/validation_rules/validation"
 	(controllername=required,controllertype=required,path=optional?if not given take it form laod config);
 */
 
-router.get('/',loadcontroller('Welcome','web')['showWelcome']);
+router.get('/',loadcontroller('Welcome','web').showWelcome);
 
 module.exports = router;

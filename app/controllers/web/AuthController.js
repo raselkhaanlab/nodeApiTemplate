@@ -1,9 +1,9 @@
 let Controller = require('./WebController');
-let __this ;
+let _this ;
 module.exports = class AuthController extends Controller{
 	constructor(){
 		super();
-		__this =this;
+		_this =this;
 	}
 	async login(req,res){
 
