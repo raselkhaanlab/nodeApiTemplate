@@ -1,4 +1,4 @@
-const app = require('./../app')
+const app = require('./../app');
 const http = require('http');
 const appConfig = require('./../config/app-config');
 const routeServiceProvider = require('./../app/providers/route-service-provider');

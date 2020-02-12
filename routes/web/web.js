@@ -7,7 +7,7 @@ const validation = require("./../../app//validation/validation_rules/validation"
 	laodcontroller return a function. which have 3 parameter.
 	(controllername=required,controllertype=required,path=optional?if not given take it form laod config);
 */
-
-router.get('/',loadcontroller('Welcome','web').showWelcome);
+let welcomeController = loadcontroller('Welcome','web');
+router.get('/',welcomeController.showWelcome);
 
 module.exports = router;

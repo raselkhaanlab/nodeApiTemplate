@@ -2,7 +2,9 @@ const express = require('express');
 const router = express.Router();
 const loadcontroller = require('./../../lib/loader/loadController'); 
 const validate = require('./../../app/validation/validate');
-const validation = require("./../../app//validation/validation_rules/validation");
+const {
+	 userValidation,
+	} = require("./../../app//validation/validation_rules/validation");
 
 /*
 =========middleware ===========
@@ -13,9 +15,12 @@ const refreshTokenMiddleware = require('./../../app/middlewares/refresh-token-mi
 	laodcontroller return a function. which have 3 parameter.
 	(controllername=required,controllertype=required,path=optional?if not given take it form laod config);
 */
-router.get('/',authMiddleware,loadcontroller('UserController').getAllUsers);
-router.post('/register',validation.userValidation.userRegistrationValidation(),validate,loadcontroller('AuthController').userRegistration);
-router.post('/login',validation.userValidation.userLoginValidation(),validate,loadcontroller('AuthController').userLogin);
-router.post('/logout',authMiddleware,loadcontroller('app/controllers/api/AuthController').logout);
-router.post('/refresh-token',refreshTokenMiddleware,loadcontroller('AuthController').refreshToken);
+let userController = loadcontroller('UserController');
+router.get('/',authMiddleware,userController.getAllUsers);
+
+let authController = loadcontroller('AuthController');
+router.post('/register',userValidation.userRegistrationValidation(),validate,authController.userRegistration);
+router.post('/login',userValidation.userLoginValidation(),validate,authController.userLogin);
+router.post('/logout',authMiddleware,authController.logout);
+router.post('/refresh-token',refreshTokenMiddleware,authController.refreshToken);
 module.exports = router;
